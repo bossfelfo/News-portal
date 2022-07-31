@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  color: gray;
+  min-width: 63px;
+  min-height: 63px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: white;
+    color: red;
+  }
+
+  svg {
+    color: inherit;
+    width: 20px;
+    height: 20px;
+  }
+
+  span {
+    color: inherit;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 4px 0px;
+    text-transform: capitalize;
+  }
+}
+
+.active {
+  background-color: white;
+  color: red;
+}
