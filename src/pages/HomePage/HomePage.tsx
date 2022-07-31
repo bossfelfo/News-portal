@@ -1,6 +1,7 @@
 import { AnyAction } from '@reduxjs/toolkit';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
+import AdsCard from '../../components/AdsCard/AdsCard';
 
 import BreakingNewsCard from '../../components/BreakingNewsCard/BreakingNewsCard';
 import LatestNewsList from '../../components/LatestNewsList/LatestNewsList';
@@ -21,13 +22,24 @@ interface HomeArticleProps {
 const HomeArticles = ({ articles }: HomeArticleProps) => {
   return (
     <NewsGrid>
-      {articles.map((ar) => (
-        <NewsCard article={ar} key={ar.id} />
-      ))}
-      <BreakingNewsCard />
-      <div className={styles.listContainer}>
-        <LatestNewsList />
-      </div>
+      {articles.map((ar, i) => {
+        return i % 5 === 0 && i !== 0 ? (
+          <>
+            <AdsCard />
+            <NewsCard article={ar} key={ar.id} />
+          </>
+        ) : (
+          <NewsCard article={ar} key={ar.id} />
+        );
+      })}
+      {articles.length === 0 || (
+        <>
+          <BreakingNewsCard />
+          <div className={styles.listContainer}>
+            <LatestNewsList />
+          </div>
+        </>
+      )}
     </NewsGrid>
   );
 };

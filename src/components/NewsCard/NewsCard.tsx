@@ -11,7 +11,7 @@ const NewsCard: React.FC<Props> = ({ article }) => {
   const { title, author, url, urlToImage } = article;
 
   return (
-    <Link to={'/'}>
+    <a href={url} target="_blank">
       <div className={styles.cardContainer}>
         <div className={styles.cardImage}>
           <img src={urlToImage || process.env.PUBLIC_URL + '/images/imagePlaceholder.jpg'} alt="" />
@@ -22,7 +22,7 @@ const NewsCard: React.FC<Props> = ({ article }) => {
           <p>{author}</p>
         </div>
       </div>
-    </Link>
+    </a>
   );
 };
 

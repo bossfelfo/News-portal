@@ -2,15 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { Article } from './types';
 
-// `createAsyncThunk` is a generic function.
-// We can use the first type-parameter
-// to tell what type will be returned as a result.
+const env = {
+  API_URL: process.env.REACT_APP_API_URL,
+  API_TOKEN: process.env.REACT_APP_API_TOKEN
+};
 
-// This type describes the error object structure:
 type FetchArticlesError = {
   message: string;
 };
-
 interface FetchArticlesResponse {
   articles: Article[];
   totalResults: number;
@@ -22,18 +21,17 @@ export const fetchArticles = createAsyncThunk<
   { query?: string; limit?: number },
   { rejectValue: FetchArticlesError }
 >('articles/fetch', async ({ query, limit }, thunkApi) => {
-  let url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=0b75869c6a864ce4a0db0af7d59bf74e';
-
-  if (query) {
-    url += `&q=${query}`;
-  }
+  let url = `https://newsapi.org/v2/top-headlines?country=us&category=&{query}&apiKey=${env.API_TOKEN}`;
 
   if (limit) {
     url += `&pageSize=${limit}`;
   }
-
+  if (query === '/') {
+    url += `&q=${query}`;
+  }
   const response = await fetch(url);
 
+  // if ()
   if (response.status !== 200) {
     return thunkApi.rejectWithValue({
       message: 'Failed to fetch news.'
