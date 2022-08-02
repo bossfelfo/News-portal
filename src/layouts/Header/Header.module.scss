@@ -35,7 +35,7 @@
         width: 50px;
         z-index: 999;
       }
-      @media (min-width: 760px) {
+      @media (min-width: 1024px) {
         .hamburger {
           display: none;
         }
@@ -50,7 +50,7 @@
     margin: 0;
   }
 
-  @media (min-width: 760px) {
+  @media (min-width: 1024px) {
     .content {
       flex-direction: row;
       justify-content: flex-start;
@@ -67,7 +67,7 @@
     }
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 1024px) {
     hr {
       display: none;
     }

@@ -12,8 +12,6 @@ const Header = () => {
 
   return (
     <>
-      {/* {hasTopBar === 'false' && <TopBar />} */}
-
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.logo}>
@@ -21,8 +19,15 @@ const Header = () => {
               <img src={Logo} alt="MyNews" />
             </Link>
             <div className={styles.hamburger}>
-              {isOpenMobileNav === true ? (
-                <CloseIcon />
+              {isOpenMobileNav === false ? (
+                <div
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(closeMobileNav());
+                  }}
+                >
+                  <CloseIcon />
+                </div>
               ) : (
                 <div
                   onClick={(e) => {

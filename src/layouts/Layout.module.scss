@@ -23,14 +23,14 @@
     }
   }
 
-  @media (min-width: 760px) {
+  @media (min-width: 1024px) {
     .content > .navBar {
       display: flex;
     }
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1024px) {
   .container > .content {
     padding: 0px;
   }

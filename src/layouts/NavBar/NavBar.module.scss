@@ -1,49 +1,54 @@
-.container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  // background-color: white;
-  // color: red;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  color: gray;
-  min-width: 63px;
-  min-height: 63px;
-  cursor: pointer;
-  margin-bottom: 2px;
+ul {
+  display: grid;
+  width: 100%;
+  min-width: 30git0px;
+  grid-template-columns: repeat(3, 1fr);
 
-  &:hover {
+  .container {
+    display: flex;
+    flex-direction: column;
+    // flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: gray;
+    min-width: 63px;
+    min-height: 63px;
+    cursor: pointer;
+    margin-bottom: 2px;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: white;
+      color: red;
+    }
+
+    svg {
+      color: inherit;
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      margin-top: 6px;
+      color: inherit;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 4px 0px;
+      text-transform: capitalize;
+    }
+  }
+
+  @media (min-width: 480px) {
+    .container {
+      flex-direction: column;
+    }
+  }
+
+  .active {
     background-color: white;
     color: red;
   }
-
-  svg {
-    color: inherit;
-    width: 20px;
-    height: 20px;
-  }
-
-  span {
-    margin-top: 4px;
-    color: inherit;
-    font-size: 0.8rem;
-    font-weight: bold;
-    margin-bottom: 4px 0px;
-    text-transform: capitalize;
-  }
-}
-
-@media (min-width: 480px) {
-  .container {
-    flex-direction: column;
-    flex-wrap: wrap;
-  }
-}
-
-.active {
-  background-color: white;
-  color: red;
 }
 
 .mobileNav {
@@ -52,13 +57,21 @@
   position: fixed;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: #f2f2f2;
   justify-content: center;
   align-items: center;
+  z-index: 100;
+  overflow-y: hidden;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 1024px) {
   .mobileNav {
     display: none;
+  }
+  ul {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 100%;
   }
 }

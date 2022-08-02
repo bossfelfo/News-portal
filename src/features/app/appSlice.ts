@@ -6,7 +6,7 @@ type AppState = {
 };
 const initialState = {
   hasTopBar: localStorage.getItem('topBarState') || true,
-  isOpenMobileNav: false
+  isOpenMobileNav: true
 } as AppState;
 
 const appSlice = createSlice({
@@ -18,7 +18,7 @@ const appSlice = createSlice({
       localStorage.setItem('topBarState', 'false');
     },
     closeMobileNav: (state) => {
-      state.isOpenMobileNav = false;
+      state.isOpenMobileNav = !state.isOpenMobileNav;
     }
   }
 });

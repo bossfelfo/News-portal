@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './NewsCard.module.scss';
 import { Article } from '../../features/articles/types';
+import { BookmarkIcon } from '../icons';
 
 interface NewsCardProps {
   article: Article;

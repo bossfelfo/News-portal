@@ -4,17 +4,23 @@ import classNames from 'classnames';
 
 import styles from './NavBar.module.scss';
 import { NAV_ITEMS } from '../../utils/navIconHelper';
+import { closeMobileNav } from '../../features/app/appSlice';
+import { useAppDispatch } from '../../store';
 
 const NavBar = () => {
   const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
 
   return (
-    <nav className="wrapper">
+    <nav>
       <ul>
         {NAV_ITEMS.map((navItem) => (
           <li key={navItem.link}>
             <Link
               to={navItem.link}
+              onClick={() => {
+                dispatch(closeMobileNav());
+              }}
               className={classNames(styles.container, { [styles.active]: pathname === navItem.link })}
             >
               {navItem.icon}
