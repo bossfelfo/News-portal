@@ -1,6 +1,9 @@
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  // background-color: white;
+  // color: red;
   justify-content: center;
   align-items: center;
   background-color: transparent;
@@ -8,6 +11,7 @@
   min-width: 63px;
   min-height: 63px;
   cursor: pointer;
+  margin-bottom: 2px;
 
   &:hover {
     background-color: white;
@@ -21,6 +25,7 @@
   }
 
   span {
+    margin-top: 4px;
     color: inherit;
     font-size: 0.8rem;
     font-weight: bold;
@@ -29,7 +34,31 @@
   }
 }
 
+@media (min-width: 480px) {
+  .container {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}
+
 .active {
   background-color: white;
   color: red;
+}
+
+.mobileNav {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 480px) {
+  .mobileNav {
+    display: none;
+  }
 }

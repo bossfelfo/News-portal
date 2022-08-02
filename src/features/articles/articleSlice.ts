@@ -1,18 +1,22 @@
 import { Article } from './types';
 import { fetchArticles } from './thunk-actions';
+import { fetchAllArticles } from './thunk-actions';
+import { fetchLatestArticles } from './thunk-actions';
 
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 
 type ArticlesState = {
-  status: 'loading' | 'idle';
+  status: 'loading' | 'idle' | 'error';
   error: string | null;
-  articles: Article[];
   searchTerm: string;
+  articles: Article[];
+  latestArticles: Article[];
 };
 
 const initialState = {
   articles: [],
+  latestArticles: [],
   error: null,
   status: 'idle',
   searchTerm: ''
@@ -22,7 +26,6 @@ export const articlesSlice = createSlice({
   name: 'articlesSlice',
   initialState,
   reducers: {
-    // fill in primary logic here
     setSearchTerm: (state, action) => {
       state.searchTerm = action.payload;
     }
@@ -35,8 +38,7 @@ export const articlesSlice = createSlice({
     });
 
     builder.addCase(fetchArticles.fulfilled, (state, { payload }) => {
-      ({ state, payload });
-      state.articles.push(...payload.articles);
+      state.articles = payload.articles || [];
       state.status = 'idle';
 
       if (payload.status !== 'ok') {
@@ -46,18 +48,45 @@ export const articlesSlice = createSlice({
 
     builder.addCase(fetchArticles.rejected, (state, { payload }) => {
       if (payload) state.error = payload.message;
+      state.status = 'error';
+    });
+
+    builder.addCase(fetchAllArticles.fulfilled, (state, { payload }) => {
+      state.articles = payload.slice(0, 13) || [];
       state.status = 'idle';
+    });
+
+    builder.addCase(fetchAllArticles.rejected, (state, { payload }) => {
+      if (payload) state.error = payload.message;
+      state.status = 'error';
+    });
+
+    builder.addCase(fetchAllArticles.pending, (state) => {
+      state.status = 'loading';
+      state.error = null;
+    });
+
+    builder.addCase(fetchLatestArticles.fulfilled, (state, { payload }) => {
+      state.latestArticles = [...state.latestArticles, ...payload.articles];
+    });
+
+    builder.addCase(fetchLatestArticles.rejected, (state, { payload }) => {
+      if (payload) state.error = payload.message;
+      state.status = 'error';
+    });
+
+    builder.addCase(fetchLatestArticles.pending, (state) => {
+      state.error = null;
     });
   }
 });
 
 export const selectStatus = (state: RootState) => state.articles.status;
 
+export const selectSearchTerm = (state: RootState) => state.articles.searchTerm;
+
+export const selectErrorMessage = (state: RootState) => state.articles.error;
+
 export const { setSearchTerm } = articlesSlice.actions;
 
 export default articlesSlice.reducer;
-
-// store
-// --> slice.ts
-// --> selectors.ts
-// --> actions.ts

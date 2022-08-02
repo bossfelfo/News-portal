@@ -1,60 +1,91 @@
-import { AnyAction } from '@reduxjs/toolkit';
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useRef, useState, forwardRef } from 'react';
 import AdsCard from '../../components/AdsCard/AdsCard';
 
 import BreakingNewsCard from '../../components/BreakingNewsCard/BreakingNewsCard';
 import LatestNewsList from '../../components/LatestNewsList/LatestNewsList';
 import NewsCard from '../../components/NewsCard/NewsCard';
 import NewsGrid from '../../components/NewsGrid/NewsGrid';
-import { fetchArticles } from '../../features/articles/thunk-actions';
-import { Article } from '../../features/articles/types';
+import { selectErrorMessage, selectSearchTerm, selectStatus } from '../../features/articles/articleSlice';
+import { fetchAllArticles, fetchLatestArticles } from '../../features/articles/thunk-actions';
 import { useAppDispatch, useTypedSelector } from '../../store';
 
 import styles from './HomePage.module.scss';
 
 type TabType = 'featured' | 'latest';
 
-interface HomeArticleProps {
-  articles: Article[];
-}
+const HomeArticles = forwardRef<HTMLDivElement | null>((_, ref) => {
+  const searchTerm = useTypedSelector(selectSearchTerm);
+  const { articles } = useTypedSelector((state) => state.articles);
+  const allArticles = searchTerm
+    ? articles.filter(({ title }) => title.toLowerCase().includes(searchTerm.toLowerCase()))
+    : articles;
 
-const HomeArticles = ({ articles }: HomeArticleProps) => {
   return (
     <NewsGrid>
-      {articles.map((ar, i) => {
-        return i % 5 === 0 && i !== 0 ? (
+      {allArticles.map((ar, i) => {
+        return (
           <>
-            <AdsCard />
+            {i % 5 === 0 && i !== 0 && <AdsCard key={i} />}
             <NewsCard article={ar} key={ar.id} />
           </>
-        ) : (
-          <NewsCard article={ar} key={ar.id} />
         );
       })}
-      {articles.length === 0 || (
-        <>
-          <BreakingNewsCard />
-          <div className={styles.listContainer}>
-            <LatestNewsList />
-          </div>
-        </>
-      )}
+
+      {allArticles.length > 0 && <BreakingNewsCard />}
+
+      <div className={styles.listContainer}>
+        <LatestNewsList ref={ref} />
+      </div>
     </NewsGrid>
   );
-};
+});
 
-const HomePage: React.FC = ({}) => {
-  const dispatch = useAppDispatch();
-  const { articles } = useTypedSelector((state) => state.articles);
-
-  useEffect(() => {
-    dispatch(fetchArticles({}) as unknown as AnyAction);
-  }, [dispatch]);
-
+const HomePage = () => {
   const [activeTab, setActiveTab] = useState<TabType>('featured');
+  const loadingStatus = useTypedSelector(selectStatus);
+  const errorMessage = useTypedSelector(selectErrorMessage);
+
+  const isMounted = useRef(false);
+  const latestNewsFetched = useRef(0);
+  const [divRef, setDivRef] = useState<HTMLDivElement | null>(null);
+
+  const dispatch = useAppDispatch();
 
   const handleTabChange = (tab: TabType) => setActiveTab(tab);
+
+  useEffect(() => {
+    if (!isMounted.current) {
+      dispatch(fetchAllArticles());
+      isMounted.current = true;
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (latestNewsFetched.current < 1) {
+      dispatch(fetchLatestArticles({ pageNum: 1 }));
+      latestNewsFetched.current++;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!divRef) return;
+
+    const callback = ([entry]: IntersectionObserverEntry[]) => {
+      if (entry.isIntersecting && latestNewsFetched.current < 2) {
+        dispatch(fetchLatestArticles({ pageNum: 2 }));
+        latestNewsFetched.current++;
+      }
+    };
+
+    const observer = new IntersectionObserver(callback);
+
+    observer.observe(divRef);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [dispatch, divRef]);
 
   return (
     <>
@@ -75,11 +106,18 @@ const HomePage: React.FC = ({}) => {
         </ul>
       </div>
       <div className={styles.outletContent}>
-        {activeTab === 'featured' && <HomeArticles articles={articles} />}
-        {activeTab === 'latest' && <LatestNewsList />}
+        {activeTab === 'featured' && <HomeArticles ref={setDivRef} />}
+        {activeTab === 'latest' && <LatestNewsList ref={setDivRef} />}
       </div>
       <div className={styles.content}>
-        <HomeArticles articles={articles} />
+        <h2>News</h2>
+        {loadingStatus === 'loading' ? (
+          <span className={styles.container}>Loading...</span>
+        ) : loadingStatus === 'error' ? (
+          <span className={styles.container}>{errorMessage}</span>
+        ) : (
+          <HomeArticles ref={setDivRef} />
+        )}
       </div>
     </>
   );

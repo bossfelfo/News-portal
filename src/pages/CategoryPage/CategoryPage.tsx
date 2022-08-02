@@ -1,41 +1,55 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+
 import AdsCard from '../../components/AdsCard/AdsCard';
 import NewsCard from '../../components/NewsCard/NewsCard';
 import NewsGrid from '../../components/NewsGrid/NewsGrid';
 import { fetchArticles } from '../../features/articles/thunk-actions';
-import { Article } from '../../features/articles/types';
 import { useAppDispatch, useTypedSelector } from '../../store';
-import { RootState } from '../../store';
+import { Category } from '../../features/articles/types';
+import { selectErrorMessage, selectSearchTerm, selectStatus } from '../../features/articles/articleSlice';
+
+import styles from './CategoryPage.module.scss';
 
 const CategoryPage = () => {
-  const { category } = useParams();
+  const params = useParams();
+  const category = params.category as Category;
+  const dispatch = useAppDispatch();
   const { articles } = useTypedSelector((state) => state.articles);
-  const loadingStatus = useTypedSelector((state) => state.articles.status);
+  const loadingStatus = useTypedSelector(selectStatus);
+  const errorMessage = useTypedSelector(selectErrorMessage);
+  const searchTerm = useTypedSelector(selectSearchTerm);
+  const articlesTrimmed = articles;
+  const categoryArticles = searchTerm
+    ? articlesTrimmed.filter(({ title }) => title.toLowerCase().includes(searchTerm.toLowerCase()))
+    : articlesTrimmed;
 
   useEffect(() => {
-    fetchArticles({ query: category });
-  }, [category]);
-
-  if (loadingStatus === 'loading') return <span>'loading'</span>;
+    dispatch(fetchArticles({ category }));
+  }, [dispatch, params.category]);
 
   return (
-    <>
-      <span>{category}</span>;
-      <NewsGrid>
-        {articles.map((ar, i) => {
-          return i % 5 === 0 && i !== 0 ? (
-            <>
-              <AdsCard />
-              <NewsCard article={ar} key={ar.id} />
-            </>
-          ) : (
-            <NewsCard article={ar} key={ar.id} />
-          );
-        })}
-      </NewsGrid>
-    </>
+    <div className={styles.container}>
+      <h2>{category}</h2>
+      {loadingStatus === 'loading' ? (
+        <span className={styles.container}>Loading...</span>
+      ) : loadingStatus === 'error' ? (
+        <span className={styles.container}>{errorMessage}</span>
+      ) : categoryArticles.length > 0 ? (
+        <NewsGrid>
+          {categoryArticles.map((ar, i) => {
+            return (
+              <>
+                {i % 5 === 0 && i !== 0 && <AdsCard key={i} />}
+                <NewsCard article={ar} key={ar.id} />
+              </>
+            );
+          })}
+        </NewsGrid>
+      ) : (
+        <span className={styles.container}>No articles found.</span>
+      )}
+    </div>
   );
 };
 

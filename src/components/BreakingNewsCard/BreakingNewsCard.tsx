@@ -1,8 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './BreakingNewsCard.module.scss';
 
-const BreakingNewsCard: React.FC = ({}) => {
+const BreakingNewsCard = ({}) => {
   return (
     <div className={styles.cardContainer}>
       <Link to="/">

@@ -10,8 +10,8 @@ const App = () => (
   <div className="content">
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index={true} element={<HomePage />} />
         <Route path=":category" element={<CategoryPage />} />
+        <Route index element={<HomePage />} />
       </Route>
     </Routes>
   </div>

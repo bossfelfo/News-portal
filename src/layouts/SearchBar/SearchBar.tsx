@@ -1,29 +1,45 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import { SearchIcon } from '../../components/icons';
+import { setSearchTerm } from '../../features/articles/articleSlice';
+
 import styles from './SearchBar.module.scss';
 
-// const [query, setQuery] = useState('');
-const queryChangeHandler = () => {
-  // setQuery(e.target.value);
-};
+const SearchBar = ({}) => {
+  const [query, setQuery] = useState('');
+  const dispatch = useDispatch();
 
-const submitHandler = async () => {
-  // e.preventDefault();
-  //  router.push(`/search?query=${query}`);
-};
+  const handleSubmitSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-function SearchBar() {
+    if (query.trim().length > 0) {
+      dispatch(setSearchTerm(query.trim()));
+    }
+  };
+
   return (
     <div className={styles.searchSection}>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={handleSubmitSearch}>
         <SearchIcon />
-        <input name="query" placeholder="Search news" onChange={queryChangeHandler} />
+        <input
+          name="searchTerm"
+          placeholder="Search news"
+          value={query}
+          onChange={(e) => {
+            const value = e.target.value;
+            setQuery(value);
+
+            if (value.trim().length === 0) {
+              dispatch(setSearchTerm(''));
+            }
+          }}
+        />
         <button type="submit" aria-label="search">
           Search
         </button>
       </form>
     </div>
   );
-}
-
+};
 export default SearchBar;

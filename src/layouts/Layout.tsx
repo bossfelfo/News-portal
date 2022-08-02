@@ -1,14 +1,20 @@
 import { Outlet } from 'react-router-dom';
+import { useTypedSelector } from '../store';
 import Header from './Header/Header';
 
 import styles from './Layout.module.scss';
-import NavBar from './SideNavBar/NavBar';
+import MobileNavBar from './NavBar/MobileNavBar';
+import NavBar from './NavBar/NavBar';
 import TopBar from './TopBar/TopBar';
 
 const Layout = () => {
+  const { hasTopBar, isOpenMobileNav } = useTypedSelector((state) => state.app);
   return (
     <>
-      <TopBar />
+      {hasTopBar === true && <TopBar />}
+
+      {isOpenMobileNav === false && <MobileNavBar />}
+
       <div className={styles.container}>
         <Header />
         <div className={styles.content}>

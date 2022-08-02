@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
-import TopBar from '../TopBar/TopBar';
 import styles from './Header.module.scss';
 import Logo from '../../assets/MyNews.png';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { HamburgerIcon } from '../../components/icons';
+import { CloseIcon, HamburgerIcon } from '../../components/icons';
+import { useAppDispatch, useTypedSelector } from '../../store';
+import { closeMobileNav } from '../../features/app/appSlice';
 
 const Header = () => {
-  // const { hasTopBar } = useSelector((state) => state.topBar);
+  const { isOpenMobileNav } = useTypedSelector((state) => state.app);
+  const dispatch = useAppDispatch();
+
   return (
     <>
       {/* {hasTopBar === 'false' && <TopBar />} */}
@@ -20,7 +21,18 @@ const Header = () => {
               <img src={Logo} alt="MyNews" />
             </Link>
             <div className={styles.hamburger}>
-              <HamburgerIcon />
+              {isOpenMobileNav === true ? (
+                <CloseIcon />
+              ) : (
+                <div
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(closeMobileNav());
+                  }}
+                >
+                  <HamburgerIcon />
+                </div>
+              )}
             </div>
           </div>
 

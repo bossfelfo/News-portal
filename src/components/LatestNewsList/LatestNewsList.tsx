@@ -1,9 +1,12 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useTypedSelector } from '../../store';
 import LatestNewsItem from '../LatestNewsItem/LatestNewsItem';
 import styles from './LatestNewsList.module.scss';
 
-function LatestNewsList() {
+const LatestNewsList = forwardRef<HTMLDivElement | null>((_, ref) => {
+  const { latestArticles } = useTypedSelector((state) => state.articles);
+
   return (
     <>
       <div className={styles.container}>
@@ -14,26 +17,13 @@ function LatestNewsList() {
           <h2>Latest News</h2>
         </div>
         <div className={styles.listContent}>
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
-          <LatestNewsItem />
+          {latestArticles.map((ar, i) => {
+            return (
+              <div key={i} ref={i + 1 === latestArticles.length ? ref : null}>
+                <LatestNewsItem title={ar.title} publishedAt={ar.publishedAt} url={ar.url} />
+              </div>
+            );
+          })}
         </div>
         <div className={styles.listFooter}>
           <Link to="/">See all news</Link>
@@ -41,6 +31,6 @@ function LatestNewsList() {
       </div>
     </>
   );
-}
+});
 
 export default LatestNewsList;

@@ -1,13 +1,17 @@
+// import './styles/asbstracts/variables.scss';
+
 .cardContainer {
-  width: 100%;
+  // width: 100%;
+  width: 321px;
   height: 252px;
   cursor: pointer;
   display: block;
   border-radius: 10px;
   background-color: white;
   overflow: hidden;
-
+  display: none;
   display: flex;
+  flex: 1;
   flex-direction: column;
 
   .cardImage {

@@ -1,8 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './AdsCard.module.scss';
 
-const AdsCard: React.FC = ({}) => {
+const AdsCard = ({}) => {
   return (
     <Link to="/">
       <div className={styles.cardContainer}>

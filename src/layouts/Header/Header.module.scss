@@ -33,6 +33,7 @@
 
       .hamburger {
         width: 50px;
+        z-index: 999;
       }
       @media (min-width: 760px) {
         .hamburger {

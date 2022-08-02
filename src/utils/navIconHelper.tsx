@@ -17,31 +17,31 @@ export const NAV_ITEMS = [
   {
     name: 'general',
     icon: <GeneralIcon />,
-    link: '/general-news'
+    link: '/general'
   },
   {
     name: 'Business',
     icon: <BusinessIcon />,
-    link: '/business-news'
+    link: '/business'
   },
   {
     name: 'Health',
     icon: <HealthIcon />,
-    link: '/health-news'
+    link: '/health'
   },
   {
     name: 'Science',
     icon: <ScienceIcon />,
-    link: '/science-news'
+    link: '/science'
   },
   {
     name: 'Sport',
     icon: <SportIcon />,
-    link: '/sport-news'
+    link: '/sport'
   },
   {
     name: 'technology',
     icon: <TechnologyIcon />,
-    link: '/technology-news'
+    link: '/technology'
   }
 ];

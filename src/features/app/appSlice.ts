@@ -1,21 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
-const initialState = {
-  hasTopBar: localStorage.getItem('topBarState') || true
+
+type AppState = {
+  hasTopBar: string | boolean;
+  isOpenMobileNav: boolean | string;
 };
+const initialState = {
+  hasTopBar: localStorage.getItem('topBarState') || true,
+  isOpenMobileNav: false
+} as AppState;
 
 const appSlice = createSlice({
-  name: 'topBar',
+  name: 'app',
   initialState,
   reducers: {
-    closeTopBar: (state, action) => {
-      // state.hasTopBar = localStorage.setItem('topBarState', 'false');
+    closeTopBar: (state) => {
+      state.hasTopBar = false;
+      localStorage.setItem('topBarState', 'false');
     },
-    setHompage: (state, action) => {
-      //   state.hasTopBar = localStorage.setItem('topBarState', 'false');
+    closeMobileNav: (state) => {
+      state.isOpenMobileNav = false;
     }
   }
 });
 
-export const { closeTopBar, setHompage } = appSlice.actions;
+export const { closeTopBar, closeMobileNav } = appSlice.actions;
 
 export default appSlice.reducer;

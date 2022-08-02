@@ -1,15 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import styles from './LatestNewsItem.module.scss';
 
-const LatestNewsItem = ({}) => {
+const formatTime = (dateString: string) => {
+  const date = new Date(dateString);
+
+  return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+};
+
+const LatestNewsItem = ({ title, publishedAt, url }: { title: string; publishedAt: string; url: string }) => {
   return (
-    <Link to="/">
+    <a href={url} target="_blank">
       <div className={styles.listContainer}>
-        <h4>14:30</h4>
-        <p>5 Reasons To Choose A Notebook Over A Computer Desktop</p>
+        <h4>{formatTime(publishedAt)}</h4>
+        <p>{title}</p>
       </div>
-    </Link>
+    </a>
   );
 };
 

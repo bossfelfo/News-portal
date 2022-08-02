@@ -15,3 +15,5 @@ export type Article = {
   content: string;
   category: string;
 };
+
+export type Category = 'general' | 'business' | 'health' | 'science' | 'sports' | 'technology';

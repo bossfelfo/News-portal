@@ -2,10 +2,10 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
-import styles from '../../components/NavIcon/NavIcon.module.scss';
+import styles from './NavBar.module.scss';
 import { NAV_ITEMS } from '../../utils/navIconHelper';
 
-const NavBar: React.FC = ({}) => {
+const NavBar = () => {
   const { pathname } = useLocation();
 
   return (
