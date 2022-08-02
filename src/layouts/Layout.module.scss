@@ -1,0 +1,37 @@
+.container {
+  width: 100%;
+  padding: 0 4.27%;
+
+  .content {
+    width: 100%;
+    max-width: 68.75rem;
+    margin: 0 auto;
+    padding: 1.25rem 0px;
+    display: flex;
+    justify-content: center;
+    gap: 34px;
+    padding-bottom: 10rem;
+    box-sizing: border-box;
+
+    .navBar {
+      display: none;
+      // display: flex;
+    }
+
+    main {
+      flex: 1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .content > .navBar {
+      display: flex;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .container > .content {
+    padding: 0px;
+  }
+}

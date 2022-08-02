@@ -1,0 +1,26 @@
+.newsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .grid {
+    display: flex;
+    flex-direction: column;
+    max-width: 1100px;
+    gap: 24px;
+  }
+
+  @media (min-width: 480px) {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 760px) {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}

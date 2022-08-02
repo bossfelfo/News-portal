@@ -1,0 +1,84 @@
+// import './styles/asbstracts/variables.scss';
+
+.cardContainer {
+  width: 100%;
+  max-width: 321px;
+  height: 252px;
+  cursor: pointer;
+  display: block;
+  border-radius: 10px;
+  background-color: white;
+  overflow: hidden;
+  display: none;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  .cardImage {
+    width: 100%;
+    height: 100%;
+    max-height: 140px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cardLabel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 25px;
+      height: 100%;
+      max-height: 24px;
+      background-color: #bb1e1e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      margin-left: 20px;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 3px;
+
+      p {
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: capitalize;
+        color: white;
+
+        padding: 5px;
+      }
+    }
+  }
+
+  .cardContent {
+    padding: 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    h4 {
+      font-size: 10px;
+      font-weight: bold;
+      color: #1e71bb;
+    }
+    h2 {
+      margin-top: 2px;
+      font-size: 16px;
+      font-weight: bold;
+      color: black;
+    }
+    p {
+      font-size: 12px;
+      margin-top: auto;
+      color: #1d1d1b;
+    }
+  }
+}
