@@ -33,8 +33,8 @@ npm start
 
 # Libraries Used
 
-- [Redux ToolKit](https://redux-toolkit.js.org/)for state management to help simplify many common use cases, including store setup, creating reducers and writing immutable update logic, and even creating entire "slices" of state at once
+- [Redux ToolKit](https://redux-toolkit.js.org/) for state management to help simplify many common use cases, including store setup, creating reducers and writing immutable update logic, and even creating entire "slices" of state at once
 - [React Dom Router](https://reactrouter.com/) for implementing dynamic routing
 - [Eslint](https://github.com/vercel/next.js) for making code more consistent and avoiding bugs
 - [Prettier](https://github.com/microsoft/TypeScript) for code formatting
-- [ClassName](https://github.com/sass/dart-sass) to conditionally joining classNames together
+- [ClassName](https://github.com/sass/dart-sass) to conditionally joining classnames together
