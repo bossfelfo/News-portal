@@ -19,7 +19,6 @@
     color: black;
 
     li {
-      mlirgin-top: 100px;
       padding: 0.8rem 1.2rem;
       list-style: none;
       text-align: center;
@@ -107,5 +106,11 @@
     grid-column: 2;
     grid-row: 1 / 3;
     display: visible;
+  }
+}
+
+@media (max-width: 1020px) {
+  .content {
+    margin-top: 20px;
   }
 }
