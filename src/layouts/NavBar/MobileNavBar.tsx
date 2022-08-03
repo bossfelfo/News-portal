@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CloseIcon, HamburgerIcon } from '../../components/icons';
-import { closeMobileNav } from '../../features/app/appSlice';
-import { useAppDispatch } from '../../store';
+
 // import Header from '../Header/Header';
 import NavBar from './NavBar';
 import styles from './NavBar.module.scss';
@@ -10,7 +8,6 @@ import Logo from '../../assets/MyNews.png';
 import SearchBar from '../SearchBar/SearchBar';
 
 const MobileNavBar = ({}) => {
-  const dispatch = useAppDispatch();
   return (
     <div className={styles.mobileNav}>
       {/* <div

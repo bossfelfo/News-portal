@@ -45,5 +45,15 @@
   .searchSection {
     width: 100%;
     margin-left: 2.6875rem;
+
+    button {
+      display: static;
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .searchSection > form > button {
+    display: none;
   }
 }
