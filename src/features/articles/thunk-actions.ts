@@ -3,8 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Article, Category } from './types';
 
 const env = {
-  API_URL: process.env.REACT_APP_API_URL,
-  API_TOKEN: process.env.REACT_APP_API_TOKEN
+  API_URL: process.env.REACT_APP_API_URL || process.env.API_URL,
+  API_TOKEN: process.env.REACT_APP_API_TOKEN || process.env.API_TOKEN
 };
 
 interface FetchArticlesError {

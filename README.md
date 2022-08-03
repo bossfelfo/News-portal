@@ -1,46 +1,40 @@
-# Getting Started with Create React App
+# `News Portal`
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Web application for reading breaking news stories as they happen around the world. News Portal fetches data from [News API](https://newsapi.org)
 
-## Available Scripts
+# Getting Started
 
-In the project directory, you can run:
+Download and install Node.js on your computer (https://nodejs.org/en/download/).
 
-### `npm start`
+Then, open VSCODE, drag the project folder to it. Open VSCODE terminal and install dependencies (you need to do this only in the first time)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+npm install
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Create an account at [NewsApi](https://newsapi.org).
+insert token into and rename file to env
 
-### `npm test`
+```
+env.local.example
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Run this command in your terminal to open a local server at localhost:8080
 
-### `npm run build`
+```
+npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Built With
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [Create React App](https://create-react-app.dev/) as library to preconfigured webpack or Babel so that I can focus on the code
+- [TypeScript](https://www.typescriptlang.org/docs/) as coding language to add static typing to variables and function parameters
+- [Sass](https://sass-lang.com/documentation/) as CSS pre-processor to keep things organised and allows you to create style sheets faster
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Libraries Used
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Redux ToolKit](https://redux-toolkit.js.org/)for state management to help simplify many common use cases, including store setup, creating reducers and writing immutable update logic, and even creating entire "slices" of state at once
+- [React Dom Router](https://reactrouter.com/) for implementing dynamic routing
+- [Eslint](https://github.com/vercel/next.js) for making code more consistent and avoiding bugs
+- [Prettier](https://github.com/microsoft/TypeScript) for code formatting
+- [ClassName](https://github.com/sass/dart-sass) to conditionally joining classNames together
