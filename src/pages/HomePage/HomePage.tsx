@@ -23,11 +23,11 @@ const HomeArticles = forwardRef<HTMLDivElement | null>((_, ref) => {
 
   return (
     <NewsGrid>
-      {allArticles.map((ar, i) => {
+      {allArticles.map((article, i) => {
         return (
           <>
             {i % 5 === 0 && i !== 0 && <AdsCard key={i} />}
-            <NewsCard article={ar} key={ar.id} />
+            <NewsCard article={article} key={article.id} />
           </>
         );
       })}

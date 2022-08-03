@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTypedSelector } from '../../store';
+import { ChevronRightIcon } from '../icons';
 import LatestNewsItem from '../LatestNewsItem/LatestNewsItem';
 import styles from './LatestNewsList.module.scss';
 
@@ -14,19 +15,23 @@ const LatestNewsList = forwardRef<HTMLDivElement | null>((_, ref) => {
           <div className={styles.outerDot}>
             <div className={styles.innerDot}></div>
           </div>
-          <h2>Latest News</h2>
+          <h3>
+            <strong>Latest news</strong>
+          </h3>
         </div>
         <div className={styles.listContent}>
-          {latestArticles.map((ar, i) => {
+          {latestArticles.map((article, i) => {
             return (
               <div key={i} ref={i + 1 === latestArticles.length ? ref : null}>
-                <LatestNewsItem title={ar.title} publishedAt={ar.publishedAt} url={ar.url} />
+                <LatestNewsItem title={article.title} publishedAt={article.publishedAt} url={article.url} />
               </div>
             );
           })}
         </div>
         <div className={styles.listFooter}>
-          <Link to="/">See all news</Link>
+          <Link to="/">
+            See all news <ChevronRightIcon />
+          </Link>
         </div>
       </div>
     </>

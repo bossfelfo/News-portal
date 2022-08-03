@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { SearchIcon } from '../../components/icons';
+import { closeMobileNav } from '../../features/app/appSlice';
 import { setSearchTerm } from '../../features/articles/articleSlice';
 
 import styles from './SearchBar.module.scss';
@@ -15,6 +16,7 @@ const SearchBar = ({}) => {
 
     if (query.trim().length > 0) {
       dispatch(setSearchTerm(query.trim()));
+      dispatch(closeMobileNav());
     }
   };
 

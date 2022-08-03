@@ -1,3 +1,6 @@
+// @import 'styles/abstracts/variables.scss';
+// @import 'abstracts/_abstracts-dir';
+
 .topbar {
   width: 100%;
   background-color: #bb1e1e;
@@ -31,7 +34,7 @@
 
     p {
       font-size: 0.8rem;
-      color: #fff;
+      color: white;
       margin: 0;
     }
 

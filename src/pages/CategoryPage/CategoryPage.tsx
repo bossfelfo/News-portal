@@ -37,11 +37,11 @@ const CategoryPage = () => {
         <span className={styles.container}>{errorMessage}</span>
       ) : categoryArticles.length > 0 ? (
         <NewsGrid>
-          {categoryArticles.map((ar, i) => {
+          {categoryArticles.map((article, i) => {
             return (
               <>
                 {i % 5 === 0 && i !== 0 && <AdsCard key={i} />}
-                <NewsCard article={ar} key={ar.id} />
+                <NewsCard article={article} key={article.id} />
               </>
             );
           })}

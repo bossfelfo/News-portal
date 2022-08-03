@@ -9,7 +9,7 @@ const TopBar = ({}) => {
     dispatch(closeTopBar());
   };
 
-  // const url = 'localhost';
+  // const url = ': { title: string; publishedAt: string; url: string }) ';
   // const setHomepage = (url: string) => {
   //   if (document.all) {
   //     document.body.style.behavior = 'url(#default#homepage)';
@@ -40,20 +40,8 @@ const TopBar = ({}) => {
         <h2>Make MyNews your homepage</h2>
         <p>Every day discover what&apos;s trending on the internet!</p>
         <div className={styles.cta}>
-          <button
-            className={styles.primary}
-            onClick={() => {
-              //
-            }}
-          >
-            Get
-          </button>
-          <button
-            className={styles.secondary}
-            onClick={() => {
-              handleClose();
-            }}
-          >
+          <button className={styles.primary}>Get</button>
+          <button className={styles.secondary} onClick={() => handleClose()}>
             No, thanks
           </button>
         </div>
